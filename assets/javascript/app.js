@@ -34,14 +34,33 @@ triviaGame = {
         bttn.text("Click to start the game!")
         $("#play-field").append(bttn);
     },
+    // This function chooses a random question from the array in triviaGame.triviaQuestions
+    // and then displays the question in a header on the screen, with the possible answers
+    // displayed as buttons 
     chooseRandomQuestion: function() {
+
         // generates a random question object from the array of question objects. 
         question = triviaGame.triviaQuestions[Math.floor(Math.random() * triviaGame.triviaQuestions.length)];
+        
         // create a header to display the question
         var questionHeader = $("<h1>");
         $(questionHeader).attr('id', "askQuestion");
         questionHeader.text(question.q);
         $("#play-field").append(questionHeader);
+
+        // create a button for each possible answer to the question
+        for (var i = 0; i < question.pa.length;i++){
+            // our jquery element
+            var a = $("<button>");
+            // add class of "question-button" to a
+            a.addClass("question-button");
+            // adding an id using the index, will use this to check the answer
+            a.attr('id', i);
+            a.text(question.pa[i])
+            // add the button to the play-field
+            $("#play-field").append(a);
+
+        }
         
     }
 
@@ -55,7 +74,7 @@ triviaGame.init();
 $("#start-button").on('click', function() {
         // Empty the play field, and call the chooseRandomQuestion to display the questions
         $("#play-field").empty(); 
-        chooseRandomQuestion();
+       triviaGame.chooseRandomQuestion();
         if (triviaGame.triviaQuestions >= 1){
             setInterval(chooseRandomQuestion, 30000);
 
