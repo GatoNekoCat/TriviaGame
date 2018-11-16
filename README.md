@@ -3,24 +3,30 @@ A trivia game using timers
 
 
 Need an array of question objects. Each question object will hold a question, an array of possible answers, the location of the correct answer
-points = 0;
+score = 0;
 
-display: "gamestart, click the button to start the game"
+display: "click the button to start the game"
 
 onclick: 
-    questionObj = {};
+while triviaQuestions >= 1 {
     setinterval(triviaGame){
-    for questionsArray.length {
-        pickRandomQuestion will choose a random question from the array of questions and asign it to questionObj, then display it on the screen along with possible answers as buttons. 
+    
+        pickRandomQuestion will choose a random question from the array of questions and asign it to questionObj, then display it on the screen along with possible answers as buttons. Also will remove the question from the array.
         onbuttonclick:
             if button id === questionObj
                 interupt timer
-                points++
+                score++
                 display "Correct"               
 
             else
                 interupt timer
                 display "Incorrect"
+
+        if trivialQuestions === 0
+            Display game over and the score. 
+            try again button
+            onclick:
+                init
     }
         
         
