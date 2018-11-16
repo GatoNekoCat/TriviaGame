@@ -35,7 +35,8 @@ triviaGame = {
                  q:"What date is written on the check the dude writes to pay for his milk?",
                  pa:["Nov 5th","Sept 11th","Oct 31st","April 20th"],
                  an: "1"
-             }
+             },
+
         
 
         ];
@@ -75,7 +76,20 @@ triviaGame = {
             })
 
         };
+    // Create a timer
+    var countdownTimer = $("<h1>");
+    countdownTimer.attr('id',"count-down-timer");
+    setInterval(myTimer,1000);
+    var timerNum = 10;
+    function myTimer(){
+        $("#countdown").empty(); 
+        timerNum--;
+        countdownTimer.text("Time Left: " +timerNum);
+        $("#countdown").append(countdownTimer);
 
+
+
+    }
         // generates a random question object from the array of question objects. 
         var question = triviaGame.triviaQuestions[Math.floor(Math.random() * triviaGame.triviaQuestions.length)];
         // next I want the index location of the questioon
@@ -131,7 +145,7 @@ $("#start-button").on('click', function() {
        triviaGame.chooseRandomQuestion();
     //    This is where the time for each question goes ***
     clearInterval(guessTime);
-    guessTime = setInterval(triviaGame.chooseRandomQuestion, 3000);
+    guessTime = setInterval(triviaGame.chooseRandomQuestion, 10000);
 
         });
    
