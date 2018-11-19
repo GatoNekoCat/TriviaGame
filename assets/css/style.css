@@ -1,0 +1,63 @@
+/* *{
+    box-sizing: border-box;
+/* } */
+html, body {
+    height: 100%;
+    background-color: #FC9E44;
+}
+body {
+    color: #FC9E44;
+    text-align: center;
+    text-shadow: 0 .05rem .1rem rgba(0,0,0,.5);
+}
+#play-field button {
+    margin: auto;
+    font-family: 'Bangers', cursive;
+
+}
+p {
+    border: 2px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2vh;
+    color: #FC9E44;
+    background-color: #231A15;
+    font-family: 'Monoton', cursive;
+    letter-spacing: 3px;
+
+
+}
+/* .container  {
+    border: 2px solid black;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto; 
+    margin-top: 30vh;
+    height: 30vh;
+     overflow: hidden;
+} */
+/* 
+
+.main-text {
+    border: 2px solid black;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto; 
+
+} */
+
+.question-button {
+    width: 40%;
+    
+}
+img {
+    margin-left: 10vh;
+    margin-right: 10vh;
+    height: 100%;
+    width: 100%;
+    margin-top: 20px;
+} 
+.container.jumbotron {
+    background-color: #231A15;
+
+}

@@ -3,9 +3,10 @@
 triviaGame = {
     // These are passed in through init
     highScore: 0,
-    triviaQuestions: [{}],
+    triviaQuestions: [],
     score: 0,
     answer: 0,
+    timerNum: 0,
     
 
 
@@ -13,6 +14,9 @@ triviaGame = {
     init: function(){
         // Clear the game board
         $("#play-field").empty();  
+        $("#count-down-timer").empty();  
+        $("#count-down").empty();  
+        $("#dudes-image-div").empty();
         // Set the score and questions back for use in this game
         triviaGame.score = 0;
         triviaGame.triviaQuestions = [
@@ -40,11 +44,25 @@ triviaGame = {
         
 
         ];
-        // Create a button to trigger the start of the game
+        // Create a bttn to hold the button to trigger the start of the game
         var bttn = $("<button>");
+        // Give bttn id of start-button and for bootstrap, the type of button btn btn-primary btn-lg
         $(bttn).attr('id', 'start-button');
-        bttn.text("Click to start the game!");
+        $(bttn).attr('type', 'button');
+        $(bttn).addClass("btn btn-primary btn-lg");
+        // flavor text
+        bttn.text("Far out, man!");
         $("#play-field").append(bttn);
+        // display the start image
+        $("img").attr('src', 'assets/images/dude1.jpg');
+        // create and display the intro text
+        introText = $("<p>");
+        $(introText).addClass("lead");
+        
+        dudeText = $("<p>");
+
+        $(dudeText).attr("id", "dude");
+        $("#dudes-image-div")
     },
     // This function chooses a random question from the array in triviaGame.triviaQuestions
     // and then displays the question in a header on the screen, with the possible answers
@@ -53,11 +71,19 @@ triviaGame = {
 
             // Empty the playfield first
             $("#play-field").empty(); 
+            // clear the timer
+            $("#count-down-timer").empty();
+            // Reset it
+            // clearInterval(triviaGame.myTimer);
 
+        //  **Game Over Check
         // an initial check to see if there is a question to get. If not, game is over.
         if (triviaGame.triviaQuestions === undefined || triviaGame.triviaQuestions.length == 0) {
             // stop the interval
             clearInterval(guessTime);
+            // clearInterval(myTimer);
+            $("#count-down-timer").empty();
+            $("#count-down").empty();
             // array empty or does not exist
             var gameOver = $("<h1>");
             gameOver.text("Game Over");
@@ -76,20 +102,22 @@ triviaGame = {
             })
 
         };
-    // Create a timer
-    var countdownTimer = $("<h1>");
-    countdownTimer.attr('id',"count-down-timer");
-    setInterval(myTimer,1000);
-    var timerNum = 10;
-    function myTimer(){
-        $("#countdown").empty(); 
-        timerNum--;
-        countdownTimer.text("Time Left: " +timerNum);
-        $("#countdown").append(countdownTimer);
 
-
-
-    }
+        // function gameTime() {
+        //     // Create a timer
+        //     var countdownTimer = $("<h1>");
+        //     countdownTimer.attr('id',"count-down-timer");        
+        //     setInterval(myTimer,1000);
+        //     triviaGame.timerNum = 10;
+        //     triviaGame.myTimer();
+               
+        // };
+        // gameTime();
+        
+        
+        
+            
+    
         // generates a random question object from the array of question objects. 
         var question = triviaGame.triviaQuestions[Math.floor(Math.random() * triviaGame.triviaQuestions.length)];
         // next I want the index location of the questioon
@@ -114,7 +142,7 @@ triviaGame = {
             // add the button to the play-field
             $("#play-field").append(a);
 
-        }
+        };
         // store the answer number in the object
        triviaGame.answer = question.an;
     //  listen for the button click
@@ -125,12 +153,26 @@ triviaGame = {
         // it will call chooseRandomQuestion either way.
         if (this.id === triviaGame.answer){
             triviaGame.score++;
+            // clear the timer
+            // clearInterval(myTimer);
+            $("#count-down-timer").empty();
+            
             triviaGame.chooseRandomQuestion();
         };
-        triviaGame.chooseRandomQuestion();
+        $("#count-down-timer").empty();
+        triviaGame.chooseRandomQuestion();        
         });
         
-    }
+    },
+    // This will be my countdown function 
+    myTimer: function(){
+        $("#countdown").empty(); 
+        var countdownTimer = $("<h1>");
+        countdownTimer.attr('id',"count-down-timer");
+        triviaGame.timerNum--;
+        countdownTimer.text("Time Left: " +timerNum);
+        $("#countdown").append(countdownTimer);
+    },
 
 // end of triviaGame 
 };
@@ -142,7 +184,7 @@ $( document ).ready(function() {
 triviaGame.init();
 $("#start-button").on('click', function() {
         // Empty the play field, and call the chooseRandomQuestion to display the questions
-       triviaGame.chooseRandomQuestion();
+    triviaGame.chooseRandomQuestion();
     //    This is where the time for each question goes ***
     clearInterval(guessTime);
     guessTime = setInterval(triviaGame.chooseRandomQuestion, 10000);
