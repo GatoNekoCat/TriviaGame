@@ -114,7 +114,7 @@ triviaGame = {
             playAgain.text("Play again?");
             playAgain.attr("id", "play-again-btn");
             $("#play-field").append(playAgain);
-            $("#play-again-btn").on('click', function(){
+            $(document).on('click', "#play-again-btn", function(){
                 triviaGame.init();
 
             })
@@ -150,6 +150,7 @@ triviaGame = {
         // var qbreak = $("<br");
         // $("#play-field").append(qbreak);
 
+        var b = $("<div>").addClass("play-buttons");
 
         // create a button for each possible answer to the question
         for (var i = 0; i < question.pa.length;i++){
@@ -161,9 +162,11 @@ triviaGame = {
             a.attr('id', i);
             a.text(question.pa[i])
             // add the button to the play-field
-            $("#play-field").append(a);
-
+            b.append(a);
         };
+
+        $("#play-field").append(b);
+        
         // store the answer number in the object
        triviaGame.answer = question.an;
     //  listen for the button click
@@ -204,7 +207,7 @@ $( document ).ready(function() {
 
 // When the page is ready, initialize
 triviaGame.init();
-$("#start-button").on('click', function() {
+$(document).on('click', "#start-button", function() {
         // Empty the play field, and call the chooseRandomQuestion to display the questions
     triviaGame.chooseRandomQuestion();
     //    This is where the time for each question goes ***

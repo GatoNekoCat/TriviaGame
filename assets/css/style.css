@@ -72,3 +72,7 @@ img {
     margin-top: 3vh;
     margin-bottom: 5vh;
 }
+
+.play-buttons {
+    width: 100%;
+}
