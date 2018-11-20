@@ -55,9 +55,20 @@ img {
     margin-right: 10vh;
     height: 100%;
     width: 100%;
-    margin-top: 20px;
+    margin-top: 10vh;
+    margin-bottom: 2vh;
 } 
 .container.jumbotron {
     background-color: #231A15;
 
+}
+#dude {
+    font-size: 36px;
+    
+}
+#askQuestion { 
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3vh;
+    margin-bottom: 5vh;
 }

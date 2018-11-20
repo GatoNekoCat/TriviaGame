@@ -46,23 +46,40 @@ triviaGame = {
         ];
         // Create a bttn to hold the button to trigger the start of the game
         var bttn = $("<button>");
+
         // Give bttn id of start-button and for bootstrap, the type of button btn btn-primary btn-lg
         $(bttn).attr('id', 'start-button');
         $(bttn).attr('type', 'button');
         $(bttn).addClass("btn btn-primary btn-lg");
-        // flavor text
-        bttn.text("Far out, man!");
-        $("#play-field").append(bttn);
+
+
         // display the start image
-        $("img").attr('src', 'assets/images/dude1.jpg');
+        var dudeImg = $("<img>");        
+        $(dudeImg).attr('src', 'assets/images/dude1.jpg');   
+        $("#play-field").append(dudeImg);
+
         // create and display the intro text
         introText = $("<p>");
         $(introText).addClass("lead");
-        
-        dudeText = $("<p>");
+        $(introText).text("Way out west there's this fella I wanna quiz you about, a fella by the name of");
 
+        dudeText = $("<p>");
         $(dudeText).attr("id", "dude");
-        $("#dudes-image-div")
+        $(dudeText).text("Jeff Lebowski");
+        $("#dudes-image-div").append(introText);
+        $("#dudes-image-div").append(dudeText);
+        $(dudeText).hide();
+
+        $("#dude").fadeIn(2000, function(){
+
+        }); 
+
+
+        // flavor text for button
+        bttn.text("Far out, man!");
+        $("#play-field").append(bttn);
+
+        
     },
     // This function chooses a random question from the array in triviaGame.triviaQuestions
     // and then displays the question in a header on the screen, with the possible answers
@@ -75,6 +92,7 @@ triviaGame = {
             $("#count-down-timer").empty();
             // Reset it
             // clearInterval(triviaGame.myTimer);
+            
 
         //  **Game Over Check
         // an initial check to see if there is a question to get. If not, game is over.
@@ -129,6 +147,9 @@ triviaGame = {
         $(questionHeader).attr('id', "askQuestion");
         questionHeader.text(question.q);
         $("#play-field").append(questionHeader);
+        // var qbreak = $("<br");
+        // $("#play-field").append(qbreak);
+
 
         // create a button for each possible answer to the question
         for (var i = 0; i < question.pa.length;i++){
@@ -147,6 +168,7 @@ triviaGame = {
        triviaGame.answer = question.an;
     //  listen for the button click
     $(".question-button").on('click',function(){
+        clearInterval(guessTime);
         console.log(this.id);
         console.log(triviaGame.answer);
         // checks button id against the answer. If the right button is chosen the score is increased. If not, nothing happens and
